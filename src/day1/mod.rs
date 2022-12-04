@@ -31,13 +31,13 @@ pub fn parse_input(input_path: &str) -> Vec<Elf> {
     return_vec
 }
 
-pub fn calc_solution(mut elfs: Vec<Elf>, top: usize) -> i32 {
+pub fn calc_solution(mut elfs: Vec<Elf>) -> (i32, i32) {
     let mut sum = 0;
     elfs.sort();
     elfs.reverse();
     
-    for elf in elfs[0..top].into_iter() {
+    for elf in elfs[0..3].into_iter() {
         sum += elf.total_calories
     }
-    sum
+    (elfs[0].total_calories, sum)
 }

@@ -2,14 +2,17 @@
 use std::fs::OpenOptions;
 use std::io::Read;
 
+mod day1;
+mod day2;
+mod day3;
 mod day4;
 
 const INPUT_FILE: &str = "src/day4/input";
 
 fn main() {
-    let format = day4::parse_input(read_input_file(INPUT_FILE));
-    let solution = day4::calc_solution(format);
-    println!("part1: {}\npart2: {}", solution.0, solution.1)
+    day1();
+    day4();
+    println!("---------------")
 }
 
 fn read_input_file(file_path: &str) -> String {
@@ -20,4 +23,29 @@ fn read_input_file(file_path: &str) -> String {
         .unwrap();
     file.read_to_string(&mut input).unwrap();
     input
+}
+
+fn day1() {
+    let format = day1::parse_input("src/day1/input");
+    let solution = day1::calc_solution(format);
+
+    println!("---------------");
+    println!("Day 1");
+    println!("part1: {}\npart2: {}", solution.0, solution.1)
+}
+
+fn day2() {
+    todo!()
+}
+
+fn day3() {
+    todo!()
+}
+
+fn day4() {
+    let format = day4::parse_input(read_input_file(INPUT_FILE));
+    let solution = day4::calc_solution(format);
+    println!("---------------");
+    println!("Day 4");
+    println!("part1: {}\npart2: {}", solution.0, solution.1);
 }
