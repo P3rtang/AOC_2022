@@ -7,8 +7,6 @@ mod day2;
 mod day3;
 mod day4;
 
-const INPUT_FILE: &str = "src/day4/input";
-
 fn main() {
     day1();
     day4();
@@ -25,13 +23,17 @@ fn read_input_file(file_path: &str) -> String {
     input
 }
 
+fn print_solution(solution: (i32, i32), day: i32) {
+    println!("---------------");
+    println!("Day {}", day);
+    println!("part1: {}\npart2: {}", solution.0, solution.1)
+}
+
 fn day1() {
     let format = day1::parse_input("src/day1/input");
     let solution = day1::calc_solution(format);
 
-    println!("---------------");
-    println!("Day 1");
-    println!("part1: {}\npart2: {}", solution.0, solution.1)
+    print_solution(solution, 1)
 }
 
 fn day2() {
@@ -43,9 +45,7 @@ fn day3() {
 }
 
 fn day4() {
-    let format = day4::parse_input(read_input_file(INPUT_FILE));
+    let format = day4::parse_input(read_input_file("src/day4/input"));
     let solution = day4::calc_solution(format);
-    println!("---------------");
-    println!("Day 4");
-    println!("part1: {}\npart2: {}", solution.0, solution.1);
+    print_solution(solution, 4)
 }
