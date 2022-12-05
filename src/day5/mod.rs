@@ -140,5 +140,7 @@ fn test_solution() {
         file.read_to_string(&mut input).unwrap();
         input
     }
-    parse_input(read_input_file("src/day5/test"));
+    let format = parse_input(read_input_file("src/day5/test"));
+    let solution = calc_solution(format);
+    assert_eq!(("CMZ".to_string(), "MCD".to_string()), solution)
 }

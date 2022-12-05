@@ -4,13 +4,14 @@ use std::fs::OpenOptions;
 use std::io::Read;
 
 mod day1;
-// mod day2;
+mod day2;
 // mod day3;
 mod day4;
 mod day5;
 
 fn main() {
     day1();
+    day2();
     day4();
     day5();
     println!("---------------")
@@ -39,7 +40,9 @@ fn day1() {
 }
 
 fn day2() {
-    todo!()
+    let format = day2::parse_input("src/day2/input");
+    let solution = day2::calc_solution(format);
+    print_solution(solution, 2)
 }
 
 fn day3() {
