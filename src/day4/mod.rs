@@ -34,7 +34,7 @@ pub fn parse_input(input: String) -> Vec<ElfPair> {
     pairs
 }
 
-pub fn calc_solution(format: Vec<ElfPair>) -> (i32, i32) {
+pub fn calc_solution(format: Vec<ElfPair>) -> (String, String) {
     let mut count = 0;
     let mut count_part2 = 0;
     for pair in &format {
@@ -43,7 +43,7 @@ pub fn calc_solution(format: Vec<ElfPair>) -> (i32, i32) {
     for pair in &format {
         if pair.do_overlap() { count_part2 += 1 }
     }
-    (count, count_part2)
+    (count.to_string(), count_part2.to_string())
 }
 
 fn range_to_hashset(range: &str) -> HashSet<i32> {
@@ -58,7 +58,7 @@ fn range_to_hashset_test() {
     assert_eq!(range_to_hashset("2-4"), HashSet::from([2, 3, 4]));
 }
 #[test]
-fn test_solution1() {
+fn test_solution() {
     fn read_input_file(file_path: &str) -> String {
         use std::fs::OpenOptions;
         use std::io::Read;
@@ -72,5 +72,5 @@ fn test_solution1() {
     }
     let test_format = parse_input(read_input_file("src/day4/test"));
     let test = calc_solution(test_format);
-    assert_eq!(test, (2, 4));
+    assert_eq!(test, (2.to_string(), 4.to_string()));
 }
