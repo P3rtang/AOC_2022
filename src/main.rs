@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
+use std::time::SystemTime;
 use std::fs::OpenOptions;
 use std::io::Read;
 
@@ -11,11 +12,11 @@ mod day5;
 mod day6;
 
 fn main() {
-    day1();
-    day2();
-    day4();
-    day5();
-    day6();
+    timeit(|| day1());
+    timeit(|| day2());
+    timeit(|| day4());
+    timeit(|| day5());
+    timeit(|| day6());
     println!("-------------------")
 }
 
@@ -33,6 +34,15 @@ fn print_solution(solution: (String, String), day: i32) {
     println!("-------------------");
     println!("Day {}", day);
     println!("part1: {}\npart2: {}", solution.0, solution.1)
+}
+
+fn timeit<F: FnMut() -> T, T>(mut f: F) -> T {
+    let start = SystemTime::now();
+    let result = f();
+    let end = SystemTime::now();
+    let duration = end.duration_since(start).unwrap();
+    println!("took {}.{} milliseconds", duration.as_millis(), duration.as_micros());
+    result
 }
 
 fn day1() {
