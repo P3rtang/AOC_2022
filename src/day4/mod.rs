@@ -15,7 +15,7 @@ impl ElfPair {
     }
     fn do_contain(&self) -> bool {
         let union = self.get_union();
-        if union == self.elf1 || union == self.elf2 { return true }
+        if union.len() == self.elf1.len() || union.len() == self.elf2.len() { return true }
         return false
     }
     fn do_overlap(&self) -> bool {
