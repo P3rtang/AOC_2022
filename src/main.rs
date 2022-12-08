@@ -10,6 +10,7 @@ mod day2;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
 
 fn main() {
     timeit(|| day1());
@@ -17,6 +18,7 @@ fn main() {
     timeit(|| day4());
     timeit(|| day5());
     timeit(|| day6());
+    timeit(|| day7());
     println!("-------------------")
 }
 
@@ -76,4 +78,9 @@ fn day5() {
 fn day6() {
     let solution = day6::calc_solution(read_input_file("src/day6/input"));
     print_solution(solution, 6)
+}
+
+fn day7() {
+    let solution = day7::calc_solution(read_input_file("src/day7/input"));
+    print_solution(solution, 7)
 }
