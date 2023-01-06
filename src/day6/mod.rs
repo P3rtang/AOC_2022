@@ -1,52 +1,46 @@
 #[derive(Clone)]
-struct Parser {
-    input: String,
+struct Parser<const T: usize> {
+    input: Vec<u8>,
     index: usize,
-    window_size: usize
 }
 
-impl Parser {
-    fn new(input: String, window_size: usize) -> Self {
-        return Parser { input, index: 0, window_size }
+impl<const T: usize> Parser<T> {
+    fn new(input: String) -> Self {
+        return Parser { input: input.chars().map(|c| c as u8).collect::<Vec<u8>>().try_into().unwrap(), index: 0 }
     }
 }
 
-impl Iterator for Parser {
-    type Item = String;
+impl<const T: usize> Iterator for Parser<T> {
+    type Item = [u8; T];
 
     fn next(&mut self) -> Option<Self::Item> {
-        let mut input = self.input.clone();
-        let mut part = input.split_off(self.index);
-        part.split_off(self.window_size).truncate(0);
         self.index += 1;
-        return Some(part)
+        return Some(self.input[self.index - 1..self.index - 1 + T].try_into().unwrap())
     }
 }
 
-fn is_unique(string: String) -> bool {
-    let mut seen = vec!();
-    for charr in string.chars() {
-        if seen.contains(&charr) {
-            return false
-        }
-        seen.push(charr)
+fn is_unique<const T: usize> (window: [u8; T]) -> bool {
+    let mut seen = [0b0; 32];
+    for charr in window.iter().map(|c| c % 32) {
+        if seen[charr as usize] == 1 { return false }
+        seen[charr as usize] = 0b1;
     }
     return true
 }
 
 pub fn calc_solution(input: String) -> (String, String) {
-    let parser1 = Parser::new(input.clone(), 4);
-    let parser2 = Parser::new(input, 14);
+    let parser1 = Parser::<4>::new(input.clone());
+    let parser2 = Parser::new(input);
     let mut index1 = 4;
     let mut index2 = 14;
     for window in parser1 {
-        if is_unique(window) {
+        if is_unique::<4>(window) {
             break
         }
         index1 += 1;
     }
     for window in parser2 {
-        if is_unique(window) {
+        if is_unique::<14>(window) {
             break
         }
         index2 += 1;
